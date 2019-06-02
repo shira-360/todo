@@ -1,0 +1,26 @@
+<% @tasks.each do |task| %>    
+    <div class="todo_box">
+      <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+          <li id="card-body-todo" class="nav-item nav-link active">
+            To Do
+          </li>
+          <li id="card-body-list" class="nav-item nav-link">
+            コメント
+          </li>
+        </ul>
+      </div>
+      
+      <div class="card-body">
+        <div class="card-body-todo">
+          <h5 class="card-title"><%=task.title%></h5>
+          <p class="card-text">With supporting text.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+        <div class="card-body-list">
+          <h5 class="card-title"><%=task.title%></h5>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        </div>
+      </div>
+    </div>
+<% end %>

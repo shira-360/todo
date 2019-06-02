@@ -1,0 +1,19 @@
+// Place all the styles related to the tasks controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.todo_box{
+    margin: 30px;
+    border: solid thin;
+}
+
+.card-body-list { /* .contentsの中の.rightに対する記述 */
+    display: none;
+}
+
+.navbar-brand-title{
+    justify-content: center;
+}
+.nav-item{ 
+cursor: pointer;
+}
