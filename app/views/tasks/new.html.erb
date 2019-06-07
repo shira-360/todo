@@ -1,2 +1,7 @@
-<p>こんにちは</p>
-
+<div>
+    <%= form_for(@task) do |f| %>
+        <h3>To Do List　の作成</h3>
+        <%= f.text_field :title %>
+        <%= f.submit "作成"%>
+    <% end %>
+</div>
