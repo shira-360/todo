@@ -8,7 +8,7 @@ class TasksController < ApplicationController
     end
     
     def create
-        Tweet.create(task_params)
+        Task.create(task_params)
     end
     
     private
