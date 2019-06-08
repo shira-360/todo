@@ -4,12 +4,12 @@
 </nav>
 
 <body>
-  <% @tasks.each_with_index do |task,index| %>    
+  <% @tasks.each do |task| %>    
       <div class="todo_box">
         <div class="card-header card-header-padding">
           <ul class="nav nav-tabs card-header-tabs" style="float: left">
-            <li id="card-body-todo" class="nav-item #{index} nav-link active">
-              To Do <%= index %>
+            <li id="card-body-todo" class="nav-item nav-link active">
+              To Do
             </li>
             <li id="card-body-list" class="nav-item nav-link">
               コメント
@@ -17,7 +17,7 @@
             
           </ul>
           <div class="nav-item nav-link" style="text-align: right">
-            <%= link_to "更新","/tasks/#{task.id}/edit" , method: :get %>
+            <%= link_to "更新","" %>
             <%= link_to "削除","/tasks/#{task.id}", method: :delete %>
           </div>
         </div>
