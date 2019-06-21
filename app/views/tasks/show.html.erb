@@ -1,19 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/">To Do List</a>
-  
-  <% if user_signed_in? %>
-    <%= link_to "新規作成", new_task_path %> 
-    <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-  <% else %>
-    <%= link_to "ログイン", new_user_session_path, class: 'post' %>
-    <%= link_to "新規登録", new_user_registration_path, class: 'post' %>
-  <% end %>
-
-</nav>
-
-<body>
-  <% @tasks.each_with_index do |task,index| %>    
-      <div class="todo_box">
+<div class="todo_box">
         <div class="card-header card-header-padding">
           <ul class="nav nav-tabs card-header-tabs" style="float: left">
             <li id="card-body-todo" class="nav-item #{index} nav-link active">
@@ -25,25 +10,22 @@
             
           </ul>
           <div class="nav-item nav-link" style="text-align: right">
-            <%= link_to "コメント","/tasks/#{task.id}",method: :get%>
-            <%= link_to "更新","/tasks/#{task.id}/edit" , method: :get %>
-            <%= link_to "削除","/tasks/#{task.id}", method: :delete %>
+            <%= link_to "更新","/tasks/#{@task.id}/edit" , method: :get %>
+            <%= link_to "削除","/tasks/#{@task.id}", method: :delete %>
           </div>
         </div>
         
         <div class="card-body">
           <div class="card-body-todo">
-            <h5 class="card-title"><%=task.title%></h5>
+            <h5 class="card-title"><%=@task.title%></h5>
             <p class="card-text">白石</p>
             <p class="card-text">青木</p>
             <p class="card-text">田中</p>
             <a href="#" class="btn btn-primary">完了</a>
           </div>
           <div class="card-body-list">
-            <h5 class="card-title"><%=task.title%></h5>
+            <h5 class="card-title"><%=@task.title%></h5>
             <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
           </div>
         </div>
-      </div>
-  <% end %>
-</body>
+      

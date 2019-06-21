@@ -5,6 +5,11 @@ class TasksController < ApplicationController
     
     def new
         @task = Task.new
+        @users = User.all
+    end
+    
+    def show
+        @task = Task.find(params[:id])
     end
     
     def create
