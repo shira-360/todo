@@ -2,9 +2,6 @@
         <div class="card-header card-header-padding">
           <ul class="nav nav-tabs card-header-tabs" style="float: left">
             <li id="card-body-todo" class="nav-item #{index} nav-link active">
-              To Do 項目
-            </li>
-            <li id="card-body-list" class="nav-item nav-link">
               コメント
             </li>
             
@@ -18,14 +15,23 @@
         <div class="card-body">
           <div class="card-body-todo">
             <h5 class="card-title"><%=@task.title%></h5>
-            <p class="card-text">白石</p>
-            <p class="card-text">青木</p>
-            <p class="card-text">田中</p>
-            <a href="#" class="btn btn-primary">完了</a>
-          </div>
-          <div class="card-body-list">
-            <h5 class="card-title"><%=@task.title%></h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          </div>
+            <div class="container comment_box">
+                <%= form_tag("/tasks/#{@task.id}/comments", method: :post) do %>
+                  <textarea name="text" placeholder="コメントする" rows="1" cols="70"></textarea>
+                  <div><input type="submit" value="SENT" class="btn btn-primary"></div> 
+                <% end %>
+            </div>
         </div>
+        <div class="comments">   
+      <h4>＜コメント一覧＞</h4>
+      <% if @comments %>
+        <% @comments.each do |comment| %>
+          <p>
+            <strong><%= comment.user.name %>：</strong>
+            <%= comment.text %>
+          </p>
+        <% end %>
+      <% end %>
+    </div>
+</div>
       

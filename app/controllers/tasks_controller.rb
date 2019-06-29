@@ -1,6 +1,9 @@
 class TasksController < ApplicationController
+    before_action :move_to_index, except: :index
+    
     def index
-        @tasks = Task.order('id DESC')
+        @tasks = Task.includes(:users).order('id DESC').page(params[:page]).per(7)
+        @users = User.all
     end
     
     def new
@@ -10,11 +13,12 @@ class TasksController < ApplicationController
     
     def show
         @task = Task.find(params[:id])
+        @comments = @task.comments.includes(:user)
     end
     
     def create
         Task.create(task_params)
-        redirect_to controller: :tasks, action: :index
+        redirect_to root_path
     end
     
     def destroy
@@ -33,6 +37,11 @@ class TasksController < ApplicationController
     
     private
     def task_params
-        params.require(:task).permit(:title)
+        user_id = User.all.map{|user| user.id}
+        params.require(:task).permit(:name, :title).merge(user_ids: user_id)
+    end
+    
+    def move_to_index
+        redirect_to action: :index unless user_signed_in?
     end
 end
