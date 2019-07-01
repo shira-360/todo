@@ -6,7 +6,7 @@
 <div>
     <%= form_for(@task) do |f| %>
         <h3>To Do List　の作成</h3>
-        <%= f.text_area :title %>
-        <%= f.submit "作成"%>
+        <div class="task_title"><%= f.text_area :title %></div>
+        <div class="task_sakusei"><%= f.submit "作成"%></div>
     <% end %>
 </div>

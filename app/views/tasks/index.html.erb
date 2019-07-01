@@ -2,8 +2,9 @@
   <a class="navbar-brand" href="/">To Do List</a>
   
   <% if user_signed_in? %>
-    <%= link_to "新規作成", new_task_path %> 
-    <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+    <div class="koumoku"><%= link_to "新規作成", new_task_path %></div>
+    <div class="koumoku"><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></div>
+    <div class="koumoku"><%= link_to "パスワード変更", edit_user_registration_path, method: :get %></div>
   <% else %>
     <%= link_to "ログイン", new_user_session_path, class: 'post' %>
     <%= link_to "新規登録", new_user_registration_path, class: 'post' %>
@@ -36,12 +37,18 @@
         <div class="card-body">
           <div class="card-body-todo">
             <h5 class="card-title"><%= task.title %></h5>
+              
+              
               <% task.users.each do |user| %>
-                <%= form_for(@tasks) do |f| %>
-                  <div class="lastname"><%= f.check_box 'check', {:checked => true}, true, false %><%= user.name %></div>
-                <% end %>
+                <% if user.comments.where(task_id: task.id).present? %>
+                  <div class="lastname"><%= user.name %></div>
+                <% else %> 
+                  <div class="lastname text_red"><%= user.name %></div>
+                <% end %>     
               <% end %>
-            <div><a href="#" class="btn btn-primary">完了</a></div>
+              
+              
+              
           </div>
           <div class="card-body-list">
             <h5 class="card-title"><%=task.title%></h5>

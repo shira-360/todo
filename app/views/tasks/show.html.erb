@@ -4,7 +4,9 @@
             <li id="card-body-todo" class="nav-item #{index} nav-link active">
               コメント
             </li>
-            
+            <li id="card-body-todo" class="nav-item #{index} nav-link active">
+              <%= link_to "戻る",'/'%>
+            </li>
           </ul>
           <div class="nav-item nav-link" style="text-align: right">
             <%= link_to "更新","/tasks/#{@task.id}/edit" , method: :get %>
