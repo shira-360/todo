@@ -15,5 +15,45 @@
     justify-content: center;
 }
 .nav-item{ 
-cursor: pointer;
+    cursor: pointer;
+}
+
+.lastname{
+    display: inline;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.card-header-padding{
+    padding-bottom: 0;
+}
+
+.taskpage{
+    margin: 0 auto;
+    text-align: center;
+    width: 500px;
+    padding: 20px; 
+    font-size: 24px; 
+    font-family:　cursive；
+}
+
+.new_task{
+    display: inline;
+}
+
+.text_red{
+    color: red;
+}
+
+.task_title{
+    margin-left: 20px;
+}
+
+.task_sakusei{
+    margin-left: 20px;
+}
+
+.koumoku{
+    padding-left: 5px;
+    padding-right: 5px;
 }

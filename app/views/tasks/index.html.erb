@@ -1,31 +1,63 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">To Do List</a>
+  <a class="navbar-brand" href="/">To Do List</a>
+  
+  <% if user_signed_in? %>
+    <div class="koumoku"><%= link_to "新規作成", new_task_path %></div>
+    <div class="koumoku"><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></div>
+    <div class="koumoku"><%= link_to "パスワード変更", edit_user_registration_path, method: :get %></div>
+  <% else %>
+    <%= link_to "ログイン", new_user_session_path, class: 'post' %>
+    <%= link_to "新規登録", new_user_registration_path, class: 'post' %>
+  <% end %>
+
 </nav>
 
-
-<% @tasks.each do |task| %>    
-    <div class="todo_box">
-      <div class="card-header">
-        <ul class="nav nav-tabs card-header-tabs">
-          <li id="card-body-todo" class="nav-item nav-link active">
-            To Do
-          </li>
-          <li id="card-body-list" class="nav-item nav-link">
-            コメント
-          </li>
-        </ul>
-      </div>
-      
-      <div class="card-body">
-        <div class="card-body-todo">
-          <h5 class="card-title"><%=task.title%></h5>
-          <p class="card-text">With supporting text.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+<body>
+  <% @tasks.each do |task| %>    
+      <div class="todo_box">
+        <div class="card-header card-header-padding">
+          <ul class="nav nav-tabs card-header-tabs" style="float: left">
+            <li id="card-body-todo" class="nav-item #{index} nav-link active">
+              To Do 項目
+            </li>
+          </ul>
+          <% if user_signed_in? %>
+            <div class="nav-item nav-link" style="text-align: right">
+              <%= link_to "コメント","/tasks/#{task.id}",method: :get%>
+              <%= link_to "更新","/tasks/#{task.id}/edit" , method: :get %>
+              <%= link_to "削除","/tasks/#{task.id}", method: :delete %>
+            </div>
+          <% else %>
+            <div class="nav-item nav-link" style="text-align: right">
+              <%= link_to "コメント","/tasks/#{task.id}",method: :get%>
+            </div>          
+          <% end %>
         </div>
-        <div class="card-body-list">
-          <h5 class="card-title"><%=task.title%></h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        
+        <div class="card-body">
+          <div class="card-body-todo">
+            <h5 class="card-title"><%= task.title %></h5>
+              
+              
+              <% task.users.each do |user| %>
+                <% if user.comments.where(task_id: task.id).present? %>
+                  <div class="lastname"><%= user.name %></div>
+                <% else %> 
+                  <div class="lastname text_red"><%= user.name %></div>
+                <% end %>     
+              <% end %>
+              
+              
+              
+          </div>
+          <div class="card-body-list">
+            <h5 class="card-title"><%=task.title%></h5>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          </div>
         </div>
       </div>
-    </div>
-<% end %>
+  <% end %>
+  <div class = "taskpage">
+    <%= paginate(@tasks) %>
+  </div>
+</body>

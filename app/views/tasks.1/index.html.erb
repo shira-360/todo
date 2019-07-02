@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">To Do List</a>
+  <%= link_to "新規作成", new_task_path %> 
+</nav>
+
+<body>
+  <% @tasks.each do |task| %>    
+      <div class="todo_box">
+        <div class="card-header card-header-padding">
+          <ul class="nav nav-tabs card-header-tabs" style="float: left">
+            <li id="card-body-todo" class="nav-item nav-link active">
+              To Do
+            </li>
+            <li id="card-body-list" class="nav-item nav-link">
+              コメント
+            </li>
+            
+          </ul>
+          <div class="nav-item nav-link" style="text-align: right">
+            <%= link_to "更新","" %>
+            <%= link_to "削除","/tasks/#{task.id}", method: :delete %>
+          </div>
+        </div>
+        
+        <div class="card-body">
+          <div class="card-body-todo">
+            <h5 class="card-title"><%=task.title%></h5>
+            <p class="card-text">With supporting text.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+          <div class="card-body-list">
+            <h5 class="card-title"><%=task.title%></h5>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          </div>
+        </div>
+      </div>
+  <% end %>
+</body>

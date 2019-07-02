@@ -1,0 +1,39 @@
+<div class="todo_box">
+        <div class="card-header card-header-padding">
+          <ul class="nav nav-tabs card-header-tabs" style="float: left">
+            <li id="card-body-todo" class="nav-item #{index} nav-link active">
+              コメント
+            </li>
+            <li id="card-body-todo" class="nav-item #{index} nav-link active">
+              <%= link_to "戻る",'/'%>
+            </li>
+          </ul>
+          <div class="nav-item nav-link" style="text-align: right">
+            <%= link_to "更新","/tasks/#{@task.id}/edit" , method: :get %>
+            <%= link_to "削除","/tasks/#{@task.id}", method: :delete %>
+          </div>
+        </div>
+        
+        <div class="card-body">
+          <div class="card-body-todo">
+            <h5 class="card-title"><%=@task.title%></h5>
+            <div class="container comment_box">
+                <%= form_tag("/tasks/#{@task.id}/comments", method: :post) do %>
+                  <textarea name="text" placeholder="コメントする" rows="1" cols="70"></textarea>
+                  <div><input type="submit" value="SENT" class="btn btn-primary"></div> 
+                <% end %>
+            </div>
+        </div>
+        <div class="comments">   
+      <h4>＜コメント一覧＞</h4>
+      <% if @comments %>
+        <% @comments.each do |comment| %>
+          <p>
+            <strong><%= comment.user.name %>：</strong>
+            <%= comment.text %>
+          </p>
+        <% end %>
+      <% end %>
+    </div>
+</div>
+      
